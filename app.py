@@ -1,7 +1,7 @@
 # app.py
 '''
 	A list of TODOs for our project
-
+	basically taking Joe's Csv and create a visual for it.
 
 	done TODO create SQL transaction to create transactions table -- Chandler verify this is correct
 	done TODO execute the SQL transaction above
@@ -18,10 +18,14 @@
 		... we could probably do this by creating a new 'wallets' table for each day from when
 		all transactions start (ie. do we need to know when the token was created / ICO'd?)
 
+	TODO read in netowrkx and group accounts? barrabista?
+	TODO corrolate wallets 
+	TODO identify tool to plot data? matplotlib?
 
 '''
 
 import sqlite3
+import pandas as pd
 con = sqlite3.connect('./db/inspector.db')
 cur = con.cursor()
 
@@ -48,7 +52,11 @@ CREATE TABLE IF NOT EXISTS transactions(
 # TODO execute the SQL transaction above
 cur.execute(sql_create_transactions_db)
 # TODO import all data from WalletMapping.csv to the transactions table
+header= ["contract_id" , "block_num", "tx_hash", "sender", "receiver", "tx_timestamp", "tokens"]
 
+WalletMapping_df = pd.read_csv('./data/walletmapping.csv' , header=None , names=header) 
+
+WalletMapping_df.to_sql("transactions", con , if_exists="append", index=False )
 # TODO create SQL transaction to create wallets table
 sql_create_wallet_db = '''
 CREATE TABLE IF NOT EXISTS wallets(
