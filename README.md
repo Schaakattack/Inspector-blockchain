@@ -20,6 +20,6 @@ A solution for mapping blockchain wallets in order to identify large wallet hold
 
 Thanks for contributing to this project!
 
-<a href="https://github.com/https://github.com/Schaakattack/Inspector-blockchain/graphs/contributors">
+<a href="https://github.com/Schaakattack/Inspector-blockchain/graphs/contributors">
 <img src="https://contrib.rocks/image?repo=Schaakattack/Inspector-blockchain" />
 </a>
