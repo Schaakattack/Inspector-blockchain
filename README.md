@@ -6,6 +6,12 @@ A solution for mapping blockchain wallets in order to identify large wallet hold
 
 ## Technologies
 
+The stable version of this project can be run on Windows, Mac OS, or Linux as long as the user's 
+environment has the following:
+- python 3.7
+- networkx
+- sqlite3
+
 ---
 
 ## Installation Guide
@@ -21,5 +27,5 @@ A solution for mapping blockchain wallets in order to identify large wallet hold
 Thanks for contributing to this project!
 
 <a href="https://github.com/Schaakattack/Inspector-blockchain/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=Schaakattack/Inspector-blockchain" />
+<img src="https://contrib.rocks/image?repo=schaakattack/inspector-blockchain" />
 </a>
