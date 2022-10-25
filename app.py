@@ -6,12 +6,10 @@
 		TODO create a 'wallets' sqlite database
 		TODO create a 'wallet' db with appropriate columns for data
 
-
-
 '''
 
 import sqlite3
-con = sqlite3.connect('./db/wallet.db')
+con = sqlite3.connect('./db/inspector.db')
 cur = con.cursor()
 
 # ContractID		1
@@ -22,20 +20,26 @@ cur = con.cursor()
 # TrxTimestamp,		2022-10-19 10:15:47
 # Tokens			6000000
 
-# TODO create SQL transaction to create transactions table
+# TODO create SQL transaction to create transactions table -- Chandler verify this is correct
 sql_create_transactions_db = '''
 CREATE TABLE IF NOT EXISTS transactions(
 	contract_id INT,
-	
+	block_num INT,
+	tx_hash TEXT,
+	sender TEXT,
+	receiver TEXT,
+	tx_timestamp TEXT,
+	tokens REAL
 )
 '''
 # TODO execute the SQL transaction above
+cur.execute(sql_create_transactions_db)
 # # TODO import all data from WalletMapping.csv to the transactions table
 
 # TODO create SQL transaction to create wallets table
 sql_create_wallet_db = '''
 CREATE TABLE IF NOT EXISTS wallets(
-	wallet TEXT,
+	walle TEXT,
 	tokenid INT,
 	tokens REAL,
 	last_tx TEXT
