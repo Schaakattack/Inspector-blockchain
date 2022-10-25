@@ -2,9 +2,22 @@
 '''
 	A list of TODOs for our project
 
-	TODO create database of wallets based on transactions in the blockchain
-		TODO create a 'wallets' sqlite database
-		TODO create a 'wallet' db with appropriate columns for data
+
+	done TODO create SQL transaction to create transactions table -- Chandler verify this is correct
+	done TODO execute the SQL transaction above
+	done TODO create SQL transaction to create wallets table
+	done TODO execute the SQL transaction above
+
+	chandler TODO chandler, can you take a stab and identifying all other TODOs in this project?
+	chandler TODO import all data from WalletMapping.csv to the transactions table
+
+	TODO sort transaction table by transaction date
+	TODO populate wallets table with all wallets (ie senders and receivers) from the transaction table
+	TODO calculate wallet token totals based on the transactions in transaction table
+	TODO create wallet token total "snapshots" every day 
+		... we could probably do this by creating a new 'wallets' table for each day from when
+		all transactions start (ie. do we need to know when the token was created / ICO'd?)
+
 
 '''
 
@@ -34,12 +47,12 @@ CREATE TABLE IF NOT EXISTS transactions(
 '''
 # TODO execute the SQL transaction above
 cur.execute(sql_create_transactions_db)
-# # TODO import all data from WalletMapping.csv to the transactions table
+# TODO import all data from WalletMapping.csv to the transactions table
 
 # TODO create SQL transaction to create wallets table
 sql_create_wallet_db = '''
 CREATE TABLE IF NOT EXISTS wallets(
-	walle TEXT,
+	wallet TEXT,
 	tokenid INT,
 	tokens REAL,
 	last_tx TEXT
