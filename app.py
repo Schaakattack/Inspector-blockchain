@@ -31,7 +31,7 @@
 # ==================================================================================================
 # IMPORT STATEMENTS
 # ==================================================================================================
-
+import networkx as nx
 from pathlib import Path
 import pandas as pd
 import sqlite3
@@ -231,4 +231,40 @@ for row in sorted_tx_df.iterrows():
 # 	... we could probably do this by creating a new 'wallets' table for each day from when
 # 	all transactions start (ie. do we need to know when the token was created / ICO'd?)
 # TODO read in netowrkx and group accounts? barrabista?
+"""
+SELECT sender,
+       receiver,
+       SUM(tokens) AS tokens,
+       COUNT(sender) AS num_of_transactions
+FROM transactions
+GROUP BY sender, receiver;
+"""
+
+node_sql = """
+SELECT DISTINCT wallet
+FROM wallets"""
+
+edges_sql = """SELECT sender,
+receiver,
+SUM(tokens) AS tokens,
+COUNT(sender) AS num_of_transactions
+FROM transactions
+GROUP BY sender, receiver"""
+
+edges = pd.read_sql(edges_sql, con=DB_CONN)
+nodes = pd.read_sql(node_sql, con=DB_CONN)
+
+nodes_list = list(nodes['wallet'])
+
+edges_sender = list(edges['sender'])
+edges_receiver = list(edges['receiver'])
+edges_zipped = list(zip(edges_sender, edges_receiver))
+
+G = nx.Graph()
+G.add_nodes_from(nodes_list)
+G.add_edges_from(edges_zipped)
+
+nx.draw(G)
+
+# TODO check graph attempt and advise
 # TODO identify tool to plot data? matplotlib?
