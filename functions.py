@@ -37,12 +37,11 @@ def load_data_from_inspector_db(filename):
     return df
 
 def data_pipeline(df):
-    #strip address column
+    # strip address column
     data = df.iloc[:,1:]
     log = FunctionTransformer(func=np.log1p, inverse_func=np.expm1, validate=True)
     scale = StandardScaler()
     pca =PCA(n_components=data.shape[1])
-    
 
     #build pipeline
     pipe = Pipeline([('log', log ),
@@ -58,17 +57,17 @@ def cluster(results, n_clusters):
     
     
 
-def assign_cluster_to_data(df, dflabel, cl):
+def assign_cluster_to_data(df, cl):
     lbls = []
-    addrs = list(df['address'].values)
-    for i, row in dflabel.iterrows():
-        addr = row['address']
-        if row['address'] in addrs:
-            lbls.append(addrs.index(row['address']))
+    addrs = list(df['receiver'].values)
+    for i, row in df.iterrows():
+        addr = row['receiver']
+        if row['receiver'] in addrs:
+            lbls.append(addrs.index(row['receiver']))
         else:
             lbls.append(False)
 
-    dflabel['cluster'] = [cl.labels_[i] for i in lbls]
+    df['receiver'] = [cl.labels_[i] for i in lbls]
     return None
 
 def calc_tsne(results, n_components=2, perplexity=20, n_iter=300,verbose=1):
@@ -241,4 +240,4 @@ def plot_all(tsne_results,cl,df,dflabel,clusters,categs,colors ):
     
 
 
-    
+
